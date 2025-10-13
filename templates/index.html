@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Document Classifier</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f7f9fc;
+            margin: 0;
+            padding: 20px;
+        }
+        h1, h2 {
+            color: #333;
+            text-align: center;
+        }
+        form {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        input[type="file"] {
+            margin: 10px;
+            padding: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            background: #4CAF50;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #45a049;
+        }
+        table {
+            width: 90%;
+            margin: auto;
+            border-collapse: collapse;
+            margin-top: 20px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            vertical-align: top;
+        }
+        th {
+            background: #4CAF50;
+            color: white;
+        }
+        pre {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-size: 14px;
+            background: #f0f0f0;
+            padding: 8px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>📄 Document Classifier</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="files[]" multiple>
+        <br><br>
+        <button type="submit">Upload & Classify</button>
+    </form>
+
+    {% if results %}
+        <h2>Results</h2>
+        <table>
+            <tr>
+                <th>File Name</th>
+                <th>Classification</th>
+                <th>Extracted Text</th>
+            </tr>
+            {% for res in results %}
+            <tr>
+                <td>{{ res.filename }}</td>
+                <td>{{ res.classification }}</td>
+                <td><pre>{{ res.text }}</pre></td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+</body>
+</html>
